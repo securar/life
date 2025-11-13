@@ -1,9 +1,10 @@
+use macroquad::math::Vec2;
 use serde::{Deserialize, Serialize};
-use std::{collections::HashSet, hash::Hash};
+use std::collections::HashSet;
 
 type Cells = HashSet<CellPos>;
 
-#[derive(Clone, Serialize, Deserialize)]
+#[derive(Clone, Serialize, Deserialize, PartialEq, Eq)]
 pub struct Grid {
     pub alive: Cells,
     pub generation: u64,
@@ -18,6 +19,10 @@ pub struct CellPos {
 impl CellPos {
     pub fn new(x: i32, y: i32) -> Self {
         CellPos { x, y }
+    }
+
+    pub fn as_vec2(self) -> Vec2 {
+        Vec2::new(self.x as f32, self.y as f32)
     }
 }
 
@@ -92,8 +97,7 @@ impl Grid {
             if self.alive.contains(&pos) && (live_neighbors == 2 || live_neighbors == 3) {
                 alive_next.insert(*pos);
             } else if live_neighbors == 3 {
-                    alive_next.insert(*pos);
-                
+                alive_next.insert(*pos);
             }
         }
 
