@@ -1,6 +1,6 @@
 # Conway's Game Of Life implementation in Rust
 
-* Can handle ~15k alive cells at 60 FPS on Intel Core i5-4440
+* Can handle ~15k alive cells at 60 FPS on max speed on Intel Core i5-4440
 * Universe of size 4x4 **billion** cells
 
 ## Controls:
