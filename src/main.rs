@@ -25,7 +25,7 @@ fn window_conf() -> Conf {
     }
 }
 
-async fn draw_transition(current_scene: Box<&mut dyn Scene>, next_scene: Option<Box<&mut dyn Scene>>) {
+async fn draw_transition(current_scene: &mut dyn Scene, next_scene: Option<&mut dyn Scene>) {
     let color = BLACK;
     let mut alpha = 0.0;
     let step = 0.04;
@@ -73,19 +73,19 @@ async fn main() {
         if main_menu.start_button.is_released() {
             game.is_running = true;
 
-            draw_transition(Box::new(&mut main_menu), Some(Box::new(&mut game))).await;
+            draw_transition(&mut main_menu, Some(&mut game)).await;
             while game.is_running {
                 game.update();
                 next_frame().await;
             }
             main_menu.start_button.text = "Continue";
-            draw_transition(Box::new(&mut game), Some(Box::new(&mut main_menu))).await;
+            draw_transition(&mut game, Some(&mut main_menu)).await;
         }
 
         if main_menu.quit_button.is_released() {
             game.save_state();
 
-            draw_transition(Box::new(&mut main_menu), None).await;
+            draw_transition(&mut main_menu, None).await;
             return;
         }
 

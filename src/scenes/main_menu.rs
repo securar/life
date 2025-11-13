@@ -91,7 +91,7 @@ impl<'a> Button<'a> {
         draw_rectangle(self.x, self.y, self.w, self.h, color);
 
         let text_dims = measure_text(
-            &self.text,
+            self.text,
             None,
             self.font_size,
             1.0,
@@ -99,7 +99,7 @@ impl<'a> Button<'a> {
         let text_x = self.x + (self.w - text_dims.width) / 2.0;
         let text_y = self.y + (self.h + text_dims.height) / 2.0;
 
-        draw_text(&self.text, text_x, text_y, self.font_size as f32, self.text_color);
+        draw_text(self.text, text_x, text_y, self.font_size as f32, self.text_color);
     }
 }
 

@@ -62,7 +62,7 @@ impl GameState {
         let default_path = GAMEDATA_DIR.to_string() + GAME_STATE_FILE;
 
         let state_json = GameState::read(&path.unwrap_or(default_path));
-        if !state_json.is_ok() {
+        if state_json.is_err() {
             return (default_state, false);
         }
         (

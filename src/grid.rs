@@ -94,9 +94,7 @@ impl Grid {
 
         for pos in &potential_cells {
             let live_neighbors = self.count_neighbors(pos);
-            if self.alive.contains(&pos) && (live_neighbors == 2 || live_neighbors == 3) {
-                alive_next.insert(*pos);
-            } else if live_neighbors == 3 {
+            if (self.alive.contains(pos) && live_neighbors == 2) || live_neighbors == 3 {
                 alive_next.insert(*pos);
             }
         }

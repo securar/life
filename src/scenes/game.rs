@@ -224,7 +224,8 @@ impl Game {
                 let mesh_lines_pos = Vec2::new((pos.x + x) as f32, (pos.y + y) as f32);
                 let distance = mesh_lines_pos.distance(pos.as_vec2()).ceil();
 
-                if !(x * x + y * y <= radius * radius + 1) {
+                if x * x + y * y > radius * radius + 1 {
+                    // Skip if dot is not inside the circle
                     continue;
                 }
                 if distance == 0.0 {
@@ -391,7 +392,7 @@ impl Game {
         self.draw_mesh();
 
         for pos in &self.grid.alive {
-            self.draw_cell(&pos, VisualState::Alive, &frustum);
+            self.draw_cell(pos, VisualState::Alive, &frustum);
         }
 
         if !self.is_paused {
